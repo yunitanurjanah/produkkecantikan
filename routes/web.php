@@ -19,7 +19,7 @@ Auth::routes();
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/produk', 'ProdukController@index')->middleware('auth')->name('produk');
+Route::get('/produk', 'ProdukController@index')->name('produk');
 Route::get('produk-list', 'ProdukController@listProduk')->name('produk-list');
 Route::get('/addProduk', 'ProdukController@create')->name('addProduk');
 Route::post('/storeProduk', 'ProdukController@store')->name('storeProduk'); 
@@ -27,15 +27,16 @@ Route::get('/editProduk/{id}', 'ProdukController@edit')->name('editProduk');
 Route::post('/updateProduk', 'ProdukController@update')->name('updateProduk');
 Route::get('/deleteProduk/{id}', 'ProdukController@destroy')->name('deleteProduk'); 
 
-Route::get('/order', 'OrderController@index')->middleware('auth')->name('order');
-Route::get('/editOrder/{id}', 'OrderController@edit')->middleware('auth')->name('editorder');
-Route::post('/updateOrder', 'OrderController@update')->middleware('auth')->name('updateOrder');
-Route::get('/deleteOrder/{id}', 'OrderController@destroy')->middleware('auth')->name('deleteOrder');
 
-Route::get('/listUser', 'UserController@index')->middleware('auth')->name('listUser');
-Route::get('/editUser/{id}', 'UserController@edit')->middleware('auth')->name('editUser');
-Route::post('/updateUser', 'UserController@update')->middleware('auth')->name('updateUser');
-Route::get('/deleteUser/{id}', 'UserController@destroy')->middleware('auth')->name('deleteUser');
+Route::get('/order', 'OrderController@index')->name('order');
+Route::get('/editOrder/{id}', 'OrderController@edit')->name('editorder');
+Route::post('/updateOrder', 'OrderController@update')->name('updateOrder');
+Route::get('/deleteOrder/{id}', 'OrderController@destroy')->name('deleteOrder');
+
+Route::get('/listUser', 'UserController@index')->name('listUser');
+Route::get('/editUser/{id}', 'UserController@edit')->name('editUser');
+Route::post('/updateUser', 'UserController@update')->name('updateUser');
+Route::get('/deleteUser/{id}', 'UserController@destroy')->name('deleteUser');
 
 
 Route::get('/listProduk', 'User\ProdukController@index')->name('listProduk');
