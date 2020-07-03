@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'User\ProdukController@index');
 
 Auth::routes();
 
@@ -30,8 +28,9 @@ Route::post('/updateProduk', 'ProdukController@update')->name('updateProduk');
 Route::get('/deleteProduk/{id}', 'ProdukController@destroy')->name('deleteProduk'); 
 
 Route::get('/order', 'OrderController@index')->middleware('auth')->name('order');
-Route::get('/order/{id}', 'OrderController@edit')->middleware('auth')->name('editorder');
-Route::post('/updateOrder', 'OrderController@update')->name('updateOrder');
+Route::get('/editOrder/{id}', 'OrderController@edit')->middleware('auth')->name('editorder');
+Route::post('/updateOrder', 'OrderController@update')->middleware('auth')->name('updateOrder');
+Route::get('/deleteOrder/{id}', 'OrderController@destroy')->middleware('auth')->name('deleteOrder');
 
 Route::get('/listUser', 'UserController@index')->middleware('auth')->name('listUser');
 Route::get('/editUser/{id}', 'UserController@edit')->middleware('auth')->name('editUser');

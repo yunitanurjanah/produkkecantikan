@@ -21,24 +21,32 @@ class Order extends Model
     	return Order::findOrFail($idOrder);
     }
 
-    public static function addEditOrder($idOrder, $idProduk, $namaUser, $noHpUser, $addressUser)
+    public static function editOrder($idOrder)
+    {
+    	return Order::where('id', $idOrder)->with('produklist')->first();
+    }
+
+    public static function addEditOrder($idOrder, $idProduk, $namaUser, $noHpUser, $addressUser, $noOrder)
     {
     	$order = Order::where('id', $idOrder)->first();
 
     	if ($order == null) {
-    		$order = new Order();
+            $order = new Order();
+            $random1    = random_int(0,1000);
+            $random2    = random_int(0,1000);
+            $random3    = random_int(0,100);
+            $order->no_order        = $random1." ".$random2." ".$random3;
+        
+        }else{
+            $order->no_order        = $noOrder;
         }
         
-        $random1    = random_int(0,1000);
-        $random2    = random_int(0,1000);
-        $random3    = random_int(0,100);
-    	
+        
     	$order->id_produk		= $idProduk;
     	$order->nama_user		= $namaUser;
     	$order->no_hp_user		= $noHpUser;
         $order->address_user	= $addressUser;
-        $order->no_order        = $random1." ".$random2." ".$random3;
-
+        
     	$order->save();
 
     	return $order;

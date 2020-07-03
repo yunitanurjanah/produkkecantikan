@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Order;
+use App\Produk;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
@@ -13,10 +14,18 @@ class OrderController extends Controller
 
 	public function index()
     {
-        $order = DB::table('order')->latest()->get();
         
-        // $produk = Produk::findOrFail($order)
-        return view("user/order/form_success_order", compact("order"));
+        $order = DB::table('order')->latest()->first();
+        $produk = Produk::findOrFail($order->id_produk);
+            $data = array(
+                "no_order" => $order->no_order,
+                "nama_produk"   => $produk->nama_produk,
+                "harga_produk"  => $produk->harga_produk
+            );
+        
+        // print_r($data['nama_produk']);
+        // die();
+        return view("user/order/form_success_order",compact("data"));
         // return "saya";
     }
 
@@ -38,7 +47,7 @@ class OrderController extends Controller
         print_r($id_produk);
 
         $order = new Order();
-        $order->addEditOrder('',$id_produk,$nama_user, $no_hp_user, $address_user);
+        $order->addEditOrder('',$id_produk,$nama_user, $no_hp_user, $address_user,'');
 
         return redirect("/informasiOrder");
     }

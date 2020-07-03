@@ -10,13 +10,13 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">Order no</div>
-                            <div class="col-md-6" align="right">{{$order->no_order}}</div>
+                            <div class="col-md-6" align="right">{{$data['no_order']}}</div>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">Produk name</div>
-                            <div class="col-md-6" align="right">{{$order->id_produk}}</div>
+                            <div class="col-md-6" align="right">{{$data['nama_produk']}}</div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -28,7 +28,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">Total</div>
-                            <div class="col-md-6" align="right">Rp.</div>
+                            <div class="col-md-6" align="right">Rp. {{$data['harga_produk']}}</div>
                         </div>
                     </div>
 	            </div>

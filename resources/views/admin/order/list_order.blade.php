@@ -23,9 +23,9 @@
                                     <td>{{ $p->nama_produk }}</td>
                                     <td>{{ $p->harga_produk }}</td>
                                     <td>
-                                        <a href="/editProduk/{{ $p->id }}">Edit</a>
+                                        <a href="/editOrder/{{ $p->id }}">Edit</a>
                                         |
-                                        <a href="/deleteProduk/{{ $p->id }}">Hapus</a></td>
+                                        <a href="/deleteOrder/{{ $p->id }}">Hapus</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

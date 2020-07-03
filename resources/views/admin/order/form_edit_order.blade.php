@@ -11,6 +11,7 @@
                         @csrf
                         <div class="form-group">
                             <input type="hidden" name="id" id="id" class="form-control" value="{{ $order->id }}" />
+                            <input type="hidden" name="id_produk" id="id_produk" class="form-control" value="{{ $order->id_produk }}" />
                             
                             <label class="control-label col-md-4" >Order Code : </label>
                             <div class="col-md-12">
@@ -18,15 +19,24 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-4">Produk : </label>
+                            
+                            <label class="control-label col-md-4" >Name : </label>
                             <div class="col-md-12">
-                            <input type="text" name="produk" id="produk" class="form-control" value="{{ $order->id_produk }}" />
+                            <input type="text" name="name" id="name" class="form-control" value="{{ $order->nama_user }}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-4">Harga : </label>
+                            
+                            <label class="control-label col-md-4" >Phone : </label>
                             <div class="col-md-12">
-                            <input type="text" name="harga" id="harga" class="form-control" value="{{ $order->id_produk }}" />
+                            <input type="text" name="phone" id="phone" class="form-control" value="{{ $order->no_hp_user }}" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                
+                            <label class="control-label col-md-4" >Address : </label>
+                            <div class="col-md-12">
+                            <textarea name="address" id="address" class="form-control" value="{{ $order->address_user }}"></textarea>
                             </div>
                         </div>
                             <br />

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -16,12 +18,11 @@ class OrderController extends Controller
     public function index()
     {
         //
-        $order = Order::allOrder();
-        // foreach($order as $order1){
-        //     print_r($order1->id_produk[0]->nama_produk);
-        // }
-        print_r($order);
-        die();
+        $order = DB::table('order')
+            ->join('produk', 'order.id_produk', '=', 'produk.id')
+            ->select('order.*', 'produk.nama_produk', 'produk.harga_produk')
+            ->get();
+
         return view("admin/order/list_order", ['order' => $order]);
     }
 
@@ -82,10 +83,14 @@ class OrderController extends Controller
     public function edit($order)
     {
         //
-        $order = new Order();
-        $order->detailOrder($order);
+        // $order = Order::detailOrder($order);
 
-        return view("admin/order/form_edit_order", $order);
+        // $produk= Produk::all();
+        $order = Order::editOrder($order);
+        // print_r($order);
+        // die();
+
+        return view("admin/order/form_edit_order", ['order' => $order]);
         
     }
 
@@ -96,9 +101,29 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request)
     {
+        // return "saya";
         //
+        $request->validate([
+            'id'        => 'required',
+            'no_order'  => 'required',
+            'name'      => 'required',
+            'phone'     => 'required'
+        ]);
+
+        $id         = $request->input('id');
+        $no_order   = $request->input('no_order');
+        $id_produk  = $request->input('id_produk');
+        $name       = $request->input('name');
+        $phone      = $request->input('phone');
+        $address    = $request->input('phone');
+
+        $order = new Order();
+        $order->addEditOrder($id, $id_produk, $name, $phone, $address, $no_order);
+
+        return redirect("/order");
+
     }
 
     /**
@@ -107,8 +132,12 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($idorder)
     {
         //
+        $order = new Order();
+        $order->deleteOrder($idorder);
+
+        return redirect("/order");
     }
 }
